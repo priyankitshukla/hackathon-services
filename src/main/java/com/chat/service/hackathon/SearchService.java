@@ -36,7 +36,7 @@ public class SearchService {
 	
 	@RequestMapping(value="/searchservice", method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	//public @ResponseBody List<SearchResponse> getSearchService(@RequestBody SearchRequest searchRequest){
-	public @ResponseBody Map<String,Map<String,Facebook>> getSearchService(@RequestBody SearchRequest searchRequest){
+	public @ResponseBody SearchResponse getSearchService(@RequestBody SearchRequest searchRequest){
 		
 		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
 		SearchResponse searchResponse = new SearchResponse();
@@ -105,11 +105,13 @@ public class SearchService {
 			facebook.setSender_action("sender_action");
 			facebook.setNotification_type("notification_type");
 			data.put("facebook", facebook);
-			datamap.put("data", data);
+			//datamap.put("data", data);
+			searchResponse.setData(data);
+			searchResponse.setSource("test source");
 			
 			
 		}
-		return datamap;
+		return searchResponse;
 	}
 	public static void main(String[] args){
 		SpringApplication.run(SearchService.class, args);
