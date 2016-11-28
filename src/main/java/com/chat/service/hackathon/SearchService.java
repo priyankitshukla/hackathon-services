@@ -2,6 +2,8 @@ package com.chat.service.hackathon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -65,7 +67,13 @@ public class SearchService {
 					//SearchResponse searchResponse = new SearchResponse();
 					searchResponse.setSpeech(link.text());
 					searchResponse.setDisplayText(link.attr("href"));
+					Map<String,String> dataRes = new HashMap<String,String>();
+					dataRes.put(link.text(),link.attr("href"));
+					Map<String,Map<String,String>> data = new HashMap<String, Map<String,String>>();
+					data.put("facebook", dataRes);
+					searchResponse.setData(data);
 					searchResponse.setSource(searchRequest.getResult().getMetadata().getIntentName());
+					
 					//searchResponseList.add(searchResponse);
 					break;
 				}

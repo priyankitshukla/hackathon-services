@@ -1,5 +1,7 @@
 package com.chat.service.hackathon.pojo;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -8,7 +10,7 @@ public class SearchResponse {
 	
 	private String speech;
 	private String displayText;
-	private String data;
+	private Map<String,Map<String,String>> data;
 	private String contextOut;
 	
 	public String getSpeech() {
@@ -23,10 +25,11 @@ public class SearchResponse {
 	public void setDisplayText(String displayText) {
 		this.displayText = displayText;
 	}
-	public String getData() {
+	
+	public Map<String, Map<String, String>> getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Map<String, Map<String, String>> data) {
 		this.data = data;
 	}
 	public String getContextOut() {
