@@ -1,1 +1,1 @@
-java -Dserver.port=$PORT $JAVA_OPTS -jar target/search.jar
+web java -Dserver.port=$PORT $JAVA_OPTS -jar target/search.jar
