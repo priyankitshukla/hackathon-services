@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchService {
 	
 	
-	@RequestMapping(value="/getSearchService", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String getSearchService(){
+	
 		return "it works!";
 	}
 	public static void main(String[] args){
