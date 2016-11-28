@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chat.service.hackathon.pojo.SearchRequest;
 import com.chat.service.hackathon.pojo.SearchResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 @RestController
@@ -37,6 +39,12 @@ public class SearchService {
 		
 		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
 		SearchResponse searchResponse = new SearchResponse();
+		try {
+			System.out.println("Request received -->"+new ObjectMapper().writeValueAsString(searchRequest));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(StringUtils.equalsIgnoreCase("searchFid.com",searchRequest.getResult().getMetadata().getIntentName())){
 			System.out.println("Used Product Service --->"+searchRequest.getResult().getParameters().getProduct_service().get(0));
 			/*String url = "https://search.fidelity.com/search/getSearchResults?question="+searchRequest.getResult().getParameters().getProduct_service().get(0);
@@ -84,7 +92,7 @@ public class SearchService {
 			searchResponse.setSpeech("speech");
 			searchResponse.setDisplayText("displayText");
 			Map<String,String> dataRes = new HashMap<String,String>();
-			dataRes.put("facebookText","facebookTextVal");
+			dataRes.put("Title","facebookTextVal");
 			Map<String,Map<String,String>> data = new HashMap<String, Map<String,String>>();
 			data.put("facebook", dataRes);
 			searchResponse.setData(data);
