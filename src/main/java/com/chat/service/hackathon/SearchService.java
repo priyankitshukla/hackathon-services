@@ -2,8 +2,6 @@ package com.chat.service.hackathon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -32,9 +30,11 @@ public class SearchService {
 	
 	
 	@RequestMapping(value="/searchservice", method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody List<SearchResponse> getSearchService(@RequestBody SearchRequest searchRequest){
+	//public @ResponseBody List<SearchResponse> getSearchService(@RequestBody SearchRequest searchRequest){
+	public @ResponseBody SearchResponse getSearchService(@RequestBody SearchRequest searchRequest){
 		
-		List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
+		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
+		SearchResponse searchResponse = new SearchResponse();
 		if(StringUtils.equalsIgnoreCase("searchFid.com",searchRequest.getResult().getMetadata().getIntentName())){
 			String url = "https://search.fidelity.com/search/getSearchResults?question="+searchRequest.getResult().getParameters().getProduct_service().get(0);
 			try {
@@ -62,16 +62,18 @@ public class SearchService {
 				Document document = Jsoup.parse(resultol);
 				Elements links = document.select("a[href]");
 				for (Element link : links) {
-					SearchResponse searchResponse = new SearchResponse();
+					//SearchResponse searchResponse = new SearchResponse();
 					searchResponse.setSpeech(link.text());
-					searchResponse.setData(link.attr("href"));
-					searchResponseList.add(searchResponse);
+					searchResponse.setDisplayText(link.attr("href"));
+					searchResponse.setSource(searchRequest.getResult().getMetadata().getIntentName());
+					//searchResponseList.add(searchResponse);
+					break;
 				}
 			} catch (Exception exception) {
 				exception.printStackTrace();
 			}
 		}
-		return searchResponseList;
+		return searchResponse;
 	}
 	public static void main(String[] args){
 		SpringApplication.run(SearchService.class, args);

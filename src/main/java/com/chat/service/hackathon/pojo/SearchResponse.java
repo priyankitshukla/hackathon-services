@@ -1,5 +1,9 @@
 package com.chat.service.hackathon.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_EMPTY)
 public class SearchResponse {
 	
 	private String speech;
