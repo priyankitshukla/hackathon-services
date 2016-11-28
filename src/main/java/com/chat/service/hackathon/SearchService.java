@@ -40,7 +40,7 @@ public class SearchService {
 		
 		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
 		SearchResponse searchResponse = new SearchResponse();
-		Map<String,Facebook> data = new HashMap<String, Facebook>();
+		//Map<String,Facebook> data = new HashMap<String, Facebook>();
 		Map<String,Map<String,Facebook>> datamap = new HashMap<String, Map<String,Facebook>>();
 		try {
 			System.out.println("Request received -->"+new ObjectMapper().writeValueAsString(searchRequest));
@@ -99,17 +99,16 @@ public class SearchService {
 			Map<String,String> message = new HashMap<String,String>();
 			message.put("text", "response from service");
 			//message.put("quick_replies", "response from serviceqr");
-			Facebook facebook = new Facebook();
-			facebook.setMessage(message);
+//			Facebook facebook = new Facebook();
+//			facebook.setText(message);
 			//facebook.setRecipient(recipient);
-			facebook.setSender_action("mark_seen");
+			//facebook.setSender_action("mark_seen");
 			//facebook.setNotification_type("notification_type");
-			data.put("facebook", facebook);
+			Map<String, Map<String,String>> data = new HashMap<String, Map<String,String>>();
+			data.put("facebook", message);
 			//datamap.put("data", data);
 			searchResponse.setData(data);
 			searchResponse.setSource("test source");
-			
-			
 		}
 		return searchResponse;
 	}
