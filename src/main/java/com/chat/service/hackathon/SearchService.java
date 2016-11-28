@@ -1,19 +1,9 @@
 package com.chat.service.hackathon;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -23,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.service.hackathon.pojo.Data;
 import com.chat.service.hackathon.pojo.Facebook;
 import com.chat.service.hackathon.pojo.SearchRequest;
 import com.chat.service.hackathon.pojo.SearchResponse;
@@ -96,7 +87,7 @@ public class SearchService {
 			searchResponse.setDisplayText("displayText");
 			//Map<String,String> recipient = new HashMap<String,String>();
 			//recipient.put("id", "100014274137230");
-			Map<String,String> message = new HashMap<String,String>();
+			/*Map<String,String> message = new HashMap<String,String>();
 			message.put("text", "response from service");
 			//message.put("quick_replies", "response from serviceqr");
 //			Facebook facebook = new Facebook();
@@ -105,7 +96,12 @@ public class SearchService {
 			//facebook.setSender_action("mark_seen");
 			//facebook.setNotification_type("notification_type");
 			Map<String, Map<String,String>> data = new HashMap<String, Map<String,String>>();
-			data.put("facebook", message);
+			data.put("facebook", message);*/
+			Data data = new Data();
+			Map<String,String> facebook = new HashMap<String,String>();
+			facebook.put("text", "response from service");
+			data.setFacebook(facebook);
+			data.setSender_action("typing_on");
 			//datamap.put("data", data);
 			searchResponse.setData(data);
 			searchResponse.setSource("test source");
