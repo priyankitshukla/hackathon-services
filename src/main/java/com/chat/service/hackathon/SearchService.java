@@ -39,7 +39,7 @@ public class SearchService {
 		SearchResponse searchResponse = new SearchResponse();
 		if(StringUtils.equalsIgnoreCase("searchFid.com",searchRequest.getResult().getMetadata().getIntentName())){
 			System.out.println("Used Product Service --->"+searchRequest.getResult().getParameters().getProduct_service().get(0));
-			String url = "https://search.fidelity.com/search/getSearchResults?question="+searchRequest.getResult().getParameters().getProduct_service().get(0);
+			/*String url = "https://search.fidelity.com/search/getSearchResults?question="+searchRequest.getResult().getParameters().getProduct_service().get(0);
 			try {
 				HttpClient client = HttpClientBuilder
 						.create().build();
@@ -80,7 +80,15 @@ public class SearchService {
 				}
 			} catch (Exception exception) {
 				exception.printStackTrace();
-			}
+			}*/
+			searchResponse.setSpeech("speech");
+			searchResponse.setDisplayText("displayText");
+			Map<String,String> dataRes = new HashMap<String,String>();
+			dataRes.put("facebookText","facebookTextVal");
+			Map<String,Map<String,String>> data = new HashMap<String, Map<String,String>>();
+			data.put("facebook", dataRes);
+			searchResponse.setData(data);
+			searchResponse.setSource("source");
 		}
 		return searchResponse;
 	}
