@@ -102,8 +102,8 @@ public class SearchService {
 			Facebook facebook = new Facebook();
 			facebook.setMessage(message);
 			//facebook.setRecipient(recipient);
-			facebook.setSender_action("sender_action");
-			facebook.setNotification_type("notification_type");
+			//facebook.setSender_action("sender_action");
+			//facebook.setNotification_type("notification_type");
 			data.put("facebook", facebook);
 			//datamap.put("data", data);
 			searchResponse.setData(data);
