@@ -10,7 +10,7 @@ public class SearchResponse {
 	
 	private String speech;
 	private String displayText;
-	private Map<String,Facebook> data;
+	private Map<String, Map<String,String>> data;
 	private String contextOut;
 	
 	public String getSpeech() {
@@ -26,11 +26,10 @@ public class SearchResponse {
 		this.displayText = displayText;
 	}
 	
-	
-	public Map<String, Facebook> getData() {
+	public Map<String, Map<String, String>> getData() {
 		return data;
 	}
-	public void setData(Map<String, Facebook> data) {
+	public void setData(Map<String, Map<String, String>> data) {
 		this.data = data;
 	}
 	public String getContextOut() {
