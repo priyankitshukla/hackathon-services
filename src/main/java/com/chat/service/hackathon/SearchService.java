@@ -38,6 +38,7 @@ public class SearchService {
 		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
 		SearchResponse searchResponse = new SearchResponse();
 		if(StringUtils.equalsIgnoreCase("searchFid.com",searchRequest.getResult().getMetadata().getIntentName())){
+			System.out.println("Used Produce Service --->"+searchRequest.getResult().getParameters().getProduct_service().get(0));
 			String url = "https://search.fidelity.com/search/getSearchResults?question="+searchRequest.getResult().getParameters().getProduct_service().get(0);
 			try {
 				HttpClient client = HttpClientBuilder
