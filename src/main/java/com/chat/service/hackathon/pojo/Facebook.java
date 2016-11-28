@@ -1,37 +1,23 @@
 package com.chat.service.hackathon.pojo;
 
-import java.util.Map;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_EMPTY)
 public class Facebook {
-		private Map<String,String> recipient;
-		private Map<String,String> message;
-		private String sender_action;
-		private String notification_type;
-		public Map<String, String> getRecipient() {
-			return recipient;
+		private String text;
+		private List<String> quick_replies;
+		public String getText() {
+			return text;
 		}
-		public void setRecipient(Map<String, String> recipient) {
-			this.recipient = recipient;
+		public void setText(String text) {
+			this.text = text;
 		}
-		public Map<String, String> getMessage() {
-			return message;
+		public List<String> getQuick_replies() {
+			return quick_replies;
 		}
-		public void setMessage(Map<String, String> message) {
-			this.message = message;
-		}
-		public String getSender_action() {
-			return sender_action;
-		}
-		public void setSender_action(String sender_action) {
-			this.sender_action = sender_action;
-		}
-		public String getNotification_type() {
-			return notification_type;
-		}
-		public void setNotification_type(String notification_type) {
-			this.notification_type = notification_type;
+		public void setQuick_replies(List<String> quick_replies) {
+			this.quick_replies = quick_replies;
 		}
 }

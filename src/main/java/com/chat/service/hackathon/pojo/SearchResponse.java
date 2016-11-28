@@ -1,7 +1,5 @@
 package com.chat.service.hackathon.pojo;
 
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
