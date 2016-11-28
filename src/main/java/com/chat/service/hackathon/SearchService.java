@@ -33,7 +33,7 @@ public class SearchService {
 
 			@Override
 			public void configure() throws Exception {
-				from("jetty:http://192.9.200.60:8080/searchhttpservice")
+				from("jetty:http://localhost:8080/searchhttpservice")
 						.process(new Processor() {
 
 							public void process(Exchange exchange)
