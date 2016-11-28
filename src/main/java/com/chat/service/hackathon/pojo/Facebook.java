@@ -2,6 +2,9 @@ package com.chat.service.hackathon.pojo;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+@JsonInclude(Include.NON_EMPTY)
 public class Facebook {
 		private Map<String,String> recipient;
 		private Map<String,String> message;
