@@ -36,11 +36,12 @@ public class SearchService {
 	
 	@RequestMapping(value="/searchservice", method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	//public @ResponseBody List<SearchResponse> getSearchService(@RequestBody SearchRequest searchRequest){
-	public @ResponseBody Map<String,Facebook> getSearchService(@RequestBody SearchRequest searchRequest){
+	public @ResponseBody Map<String,Map<String,Facebook>> getSearchService(@RequestBody SearchRequest searchRequest){
 		
 		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
 		SearchResponse searchResponse = new SearchResponse();
 		Map<String,Facebook> data = new HashMap<String, Facebook>();
+		Map<String,Map<String,Facebook>> datamap = new HashMap<String, Map<String,Facebook>>();
 		try {
 			System.out.println("Request received -->"+new ObjectMapper().writeValueAsString(searchRequest));
 		} catch (JsonProcessingException e) {
@@ -103,13 +104,12 @@ public class SearchService {
 			facebook.setRecipient(recipient);
 			facebook.setSender_action("sender_action");
 			facebook.setNotification_type("notification_type");
-			
-			
 			data.put("facebook", facebook);
+			datamap.put("data", data);
 			
 			
 		}
-		return data;
+		return datamap;
 	}
 	public static void main(String[] args){
 		SpringApplication.run(SearchService.class, args);
