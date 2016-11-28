@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chat.service.hackathon.pojo.Facebook;
 import com.chat.service.hackathon.pojo.SearchRequest;
 import com.chat.service.hackathon.pojo.SearchResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,10 +36,11 @@ public class SearchService {
 	
 	@RequestMapping(value="/searchservice", method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 	//public @ResponseBody List<SearchResponse> getSearchService(@RequestBody SearchRequest searchRequest){
-	public @ResponseBody SearchResponse getSearchService(@RequestBody SearchRequest searchRequest){
+	public @ResponseBody Map<String,Facebook> getSearchService(@RequestBody SearchRequest searchRequest){
 		
 		//List<SearchResponse> searchResponseList = new ArrayList<SearchResponse>();
 		SearchResponse searchResponse = new SearchResponse();
+		Map<String,Facebook> data = new HashMap<String, Facebook>();
 		try {
 			System.out.println("Request received -->"+new ObjectMapper().writeValueAsString(searchRequest));
 		} catch (JsonProcessingException e) {
@@ -91,14 +93,23 @@ public class SearchService {
 			}*/
 			searchResponse.setSpeech("speech");
 			searchResponse.setDisplayText("displayText");
-			Map<String,String> dataRes = new HashMap<String,String>();
-			dataRes.put("message","facebookTextVal");
-			Map<String,Map<String,String>> data = new HashMap<String, Map<String,String>>();
-			data.put("facebook", dataRes);
-			searchResponse.setData(data);
-			searchResponse.setSource("source");
+			Map<String,String> recipient = new HashMap<String,String>();
+			recipient.put("id", "100014274137230");
+			Map<String,String> message = new HashMap<String,String>();
+			message.put("text", "response from service");
+			message.put("quick_replies", "response from serviceqr");
+			Facebook facebook = new Facebook();
+			facebook.setMessage(message);
+			facebook.setRecipient(recipient);
+			facebook.setSender_action("sender_action");
+			facebook.setNotification_type("notification_type");
+			
+			
+			data.put("facebook", facebook);
+			
+			
 		}
-		return searchResponse;
+		return data;
 	}
 	public static void main(String[] args){
 		SpringApplication.run(SearchService.class, args);
