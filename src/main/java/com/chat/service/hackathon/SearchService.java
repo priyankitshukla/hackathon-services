@@ -94,15 +94,15 @@ public class SearchService {
 			}*/
 			searchResponse.setSpeech("speech");
 			searchResponse.setDisplayText("displayText");
-			Map<String,String> recipient = new HashMap<String,String>();
-			recipient.put("id", "100014274137230");
+			//Map<String,String> recipient = new HashMap<String,String>();
+			//recipient.put("id", "100014274137230");
 			Map<String,String> message = new HashMap<String,String>();
 			message.put("text", "response from service");
 			//message.put("quick_replies", "response from serviceqr");
 			Facebook facebook = new Facebook();
 			facebook.setMessage(message);
-			facebook.setRecipient(recipient);
-			//facebook.setSender_action("sender_action");
+			//facebook.setRecipient(recipient);
+			facebook.setSender_action("mark_seen");
 			//facebook.setNotification_type("notification_type");
 			data.put("facebook", facebook);
 			//datamap.put("data", data);
