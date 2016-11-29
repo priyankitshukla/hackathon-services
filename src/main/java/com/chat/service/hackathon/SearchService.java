@@ -79,6 +79,8 @@ public class SearchService {
 					urlArray.setTitle(link.text());
 					urlArray.setUrl(link.attr("href"));
 					urlarraylist.add(urlArray);
+					if(urlarraylist.size()>1)
+						break;
 				}
 				facebook.setUrlArray(urlarraylist);
 				data.setFacebook(facebook);
