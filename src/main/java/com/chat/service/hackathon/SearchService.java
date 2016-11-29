@@ -71,7 +71,7 @@ public class SearchService {
 				searchResponse.setSpeech("speech");
 				searchResponse.setDisplayText("displayText");
 				Data data = new Data();
-				data.setSender_action("typing_on");
+				//data.setSender_action("typing_on");
 				Facebook facebook = new Facebook();
 				List<UrlArray> urlarraylist = new ArrayList<UrlArray>();
 				for (Element link : links) {
