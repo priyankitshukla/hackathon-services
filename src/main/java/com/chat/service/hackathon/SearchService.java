@@ -73,16 +73,28 @@ public class SearchService {
 				Data data = new Data();
 				//data.setSender_action("typing_on");
 				Facebook facebook = new Facebook();
-				List<UrlArray> urlarraylist = new ArrayList<UrlArray>();
-				for (Element link : links) {
-					UrlArray urlArray = new UrlArray();
-					urlArray.setTitle(link.text());
-					urlArray.setUrl(link.attr("href"));
-					urlarraylist.add(urlArray);
-					if(urlarraylist.size()>1)
-						break;
+				StringBuffer textbuf = new StringBuffer();
+				//List<UrlArray> urlarraylist = new ArrayList<UrlArray>();
+				for(int i=0;i<links.size();i++){
+					Element link = links.get(i);
+					if(i==0){
+						textbuf.append(link.text()).append("\n").append(link.attr("href"));
+					} else {
+						textbuf.append("\n").append("\n").append(link.text()).append("\n").append(link.attr("href"));
+					}
 				}
-				facebook.setUrlArray(urlarraylist);
+				
+//				for (Element link : links) {
+//					UrlArray urlArray = new UrlArray();
+//					urlArray.setTitle(link.text());
+//					urlArray.setUrl(link.attr("href"));
+//					urlarraylist.add(urlArray);
+//					if(urlarraylist.size()>1)
+//						break;
+//					
+//				}
+//				facebook.setUrlArray(urlarraylist);
+				facebook.setText(textbuf.toString());
 				data.setFacebook(facebook);
 				searchResponse.setData(data);
 				searchResponse.setSource(searchRequest.getResult().getMetadata().getIntentName());
