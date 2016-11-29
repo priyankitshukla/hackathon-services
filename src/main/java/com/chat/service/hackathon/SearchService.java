@@ -68,7 +68,6 @@ public class SearchService {
 								result.toString(), "<ol>","</ol>");
 				Document document = Jsoup.parse(resultol);
 				Elements links = document.select("a[href]");
-				searchResponse.setSpeech("speech");
 				searchResponse.setDisplayText("displayText");
 				Data data = new Data();
 				//data.setSender_action("typing_on");
@@ -82,6 +81,8 @@ public class SearchService {
 					} else {
 						textbuf.append("\n").append("\n").append(link.text()).append("\n").append(link.attr("href"));
 					}
+					if(i>1)
+						break;
 				}
 				
 //				for (Element link : links) {
@@ -97,6 +98,7 @@ public class SearchService {
 				facebook.setText(textbuf.toString());
 				data.setFacebook(facebook);
 				searchResponse.setData(data);
+				//searchResponse.setSpeech(textbuf.toString());
 				searchResponse.setSource(searchRequest.getResult().getMetadata().getIntentName());
 			} catch (Exception exception) {
 				exception.printStackTrace();
