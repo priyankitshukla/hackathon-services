@@ -2,6 +2,8 @@ package com.chat.service.hackathon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -25,6 +27,7 @@ import com.chat.service.hackathon.pojo.Data;
 import com.chat.service.hackathon.pojo.Facebook;
 import com.chat.service.hackathon.pojo.SearchRequest;
 import com.chat.service.hackathon.pojo.SearchResponse;
+import com.chat.service.hackathon.pojo.UrlArray;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -44,11 +47,13 @@ public class SearchService {
 		}
 		if(StringUtils.equalsIgnoreCase("searchFid.com",searchRequest.getResult().getMetadata().getIntentName())){
 			System.out.println("Used Product Service --->"+searchRequest.getResult().getParameters().getProduct_service().get(0));
-			String url = "https://search.fidelity.com/search/getSearchResults?question="+searchRequest.getResult().getParameters().getProduct_service().get(0);
+			String productService = searchRequest.getResult().getParameters().getProduct_service().get(0).replace(StringUtils.SPACE, "%20");
+			String url = "https://search.fidelity.com/search/getSearchResults?question="+productService;
 			try {
 				HttpClient client = HttpClientBuilder.create().build();
 				HttpGet request = new HttpGet(url);
 				request.addHeader("User-Agent","Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0");
+				request.addHeader("Content-Type", "application/x-www-form-urlencoded");
 				HttpResponse response = client.execute(request);
 				BufferedReader bufferedReader = new BufferedReader(
 						new InputStreamReader(response.getEntity().getContent()));
@@ -67,13 +72,16 @@ public class SearchService {
 				searchResponse.setDisplayText("displayText");
 				Data data = new Data();
 				data.setSender_action("typing_on");
+				Facebook facebook = new Facebook();
+				List<UrlArray> urlarraylist = new ArrayList<UrlArray>();
 				for (Element link : links) {
-					Facebook facebook = new Facebook();
-					facebook.setText(link.text());
-					data.setFacebook(facebook);
-					//searchResponse.setDisplayText(link.attr("href"));
-					break;
+					UrlArray urlArray = new UrlArray();
+					urlArray.setTitle(link.text());
+					urlArray.setUrl(link.attr("href"));
+					urlarraylist.add(urlArray);
 				}
+				facebook.setUrlArray(urlarraylist);
+				data.setFacebook(facebook);
 				searchResponse.setData(data);
 				searchResponse.setSource(searchRequest.getResult().getMetadata().getIntentName());
 			} catch (Exception exception) {
